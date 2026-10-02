@@ -1,6 +1,8 @@
-import { FormEvent, useMemo, useState } from 'react'
+import { useMemo, useState, type FormEvent } from 'react'
 import './App.css'
 import { ProfileCard } from './components/ProfileCard'
+import { ProtectedPanel } from './components/ProtectedPanel'
+import { SecurityCard } from './components/SecurityCard'
 import { StatsGrid } from './components/StatsGrid'
 import { TodoHeader } from './components/TodoHeader'
 import { TodoList } from './components/TodoList'
@@ -63,6 +65,11 @@ function App() {
         />
 
         <StatsGrid total={todos.length} active={remaining} done={completed} />
+
+        <div className="panel-stack">
+          <SecurityCard userName={user.isLoggedIn ? user.name : 'Guest'} isLoggedIn={user.isLoggedIn} />
+          <ProtectedPanel isLoggedIn={user.isLoggedIn} userName={user.isLoggedIn ? user.name : 'Guest'} />
+        </div>
 
         <form onSubmit={handleSubmit} className="todo-form">
           <input
